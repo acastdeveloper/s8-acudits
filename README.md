@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# S8. ACUDITS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripció
 
-## Available Scripts
+Recordes la web d'acudits que vas crear en l'sprint 5? En aquesa entrega la passarem a React i afegirem diverses funcionalitats.
 
-In the project directory, you can run:
+### Nivell 1
 
-### `yarn start`
+#### Exercici 1
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Igual que vam fer amb javascript, crearem la base del projecte amb React, per a això seguirem els següents passos:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Crearem la base del projecte sobre la qual treballar executant el comando:
 
-### `yarn test`
+**npx create-react-app **nom_del_projecte****
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Més informació d'aquest pas: [**Link**](https://es.reactjs.org/docs/create-a-new-react-app.html)
 
-### `yarn build`
+- **Obrir el projecte** amb el Visual Studio Code
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-  **Creació de component estàtic**: modificar el component principal perquè contingui el títol, espai per als acudits i el botó de següent (al entrar per primera vegada no se mostrarà cap acudit. Apareixerà el títol i el botó de següent acudit“).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Afegir interactivitat**: crear una funció que s'executi quan l'usuari premi el botó següent acudit. Aquesta funció haurà de carregar un acudit de la API i mostrar-lo a l'usuari.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Nota: En aquest exercici no és necessari maquetar la web, primer farem que funcioni per a passar a aplicar-li els estils.
 
-### `yarn eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Nivell 2
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Exercici 2
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Maquetar el projecte** perquè s'ajusti al següent disseny:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![](./img/acudit-disseny.png)
 
-## Learn More
+Nota: Tria la llibreria de la teva preferència.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Nivell 3
 
-### Code Splitting
+#### Exercici 3
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Consumir una API d'informació meteorològica** i mostrar-ho en la web. Aquesta API ha de dir-se en l'obertura, no mitjançant un botó.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Exercici 4
 
-### Making a Progressive Web App
+Modificar la navegació per a **mostrar a l'usuari una pantalla de benvinguda**. Hauràs de crear aquest nou component welcome i fer que es mostri per defecte. Aquest component haurà de tenir un botó d'accedir, que en ser premut s'accedeix a la pantalla d'acudits.
+La pantalla de benvinguda i principal s'han de mostrar/ocultar fent ús del **renderitzat condicional.**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+### - Exercici 5
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Modificar l'exercici anterior per a **usar rutes** en lloc del renderitzat condicional.
+Definir les rutes de l'aplicació i fer ús d'aquestes en aquest botó d'accedir.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Recordatoris
 
-### `yarn build` fails to minify
+ Els sprints duren dues setmanes i comencen en dilluns.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **És obligatori pujar tots els lliuraments almenys amb el nivell 1** al final del sprint per a poder passar al següent.
+
+- Els **lliuraments es faran a ser posible el dimecres o dijous de la segona setmana del sprint.** Si ho fas i avises al mentor perquè te de feedback, tindràs una oportunitat per a corregir errors i poder pujar nota!
+
+- Com a més tard el lliurament es farà el dilluns següent, dia que comença el nou sprint.
+
+- **És recomanable intentar aconseguir les màximes estrelles possibles** en els exercicis. Si no et dóna temps, no et preocupis. És una manera de millorar el teu perfil de cara al procés d'ocupabilitat, però també es té en compte el feedback dels mentors).
