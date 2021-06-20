@@ -425,4 +425,157 @@ export default Main;
 
 As we see this is not a very clean, reusable and optimized code. It's not  taking advantage of working with components with React. Since the begginning we could have separated funcionalities in independent components. 
 
-I commit this as "***Exercici 03 - Nivell 3 - On the quirki mode of doing things***". But the next one step it will be refactorize all this code in a better mode. 
+I commit this as "***Exercici 03 - Nivell 3 - On the quirky mode of doing things***". But the next one step it will be refactorize all this code in a better mode. 
+
+#### REFACTORIZATION
+
+It's much better work with separated components before all becomes very confuse as we have seen. Anyway this is how we should have done before:
+
+I create folder **Components**, on **src** folder and I create there 2 components: Acudit.js and Meteo.js.  
+
+##### Main.js (/src/Main.js)
+
+```jsx
+import React from "react";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row, Col } from "react-bootstrap";
+
+import "./assets/css/style.css";
+
+import Meteo from "./Components/Meteo";
+import Acudit from "./Components/Acudit";
+
+const Main = () => {
+  return (
+    <Container fluid>
+      <Row className="theTop p-2">
+        <Col>
+          <Meteo></Meteo> {/* LOOK HERE */}
+        </Col>
+      </Row>
+      <Row className="fullSize d-flex">
+        <Col className="col-8 col-lg-6 col-xl-4 m-auto">
+          <Acudit></Acudit> {/* LOOK HERE */}
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default Main;
+
+
+```
+
+##### Meteo.js (/src/Components/Meteo.js)
+
+```jsx
+import React, { Fragment, useState, useEffect } from "react";
+
+import axios from "axios";
+
+const Meteo = () => {
+  // METEO
+  const [temperatura, setTemperatura] = useState(0);
+  const [lloc, setLloc] = useState("L'Hospitalet");
+  const [humitat, setHumitat] = useState(0);
+  const [confort, setConfort] = useState(0);
+  const [descrip, setDescrip] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.openweathermap.org/data/2.5/weather?q=barcelona,es&lang=es&units=metric&appid=a0e6ac9e92dc18ce3cd493de048052d5"
+      )
+      .then((res) => {
+        setTemperatura(res.data.main.temp);
+        setLloc(res.data.name);
+        setHumitat(res.data.main.humidity);
+        setConfort(res.data.main.feels_like);
+        setDescrip(res.data.weather[0].description);
+      });
+  }, []);
+
+  return (
+    <Fragment>
+      <strong>{lloc}</strong>: Temperatura: {temperatura}ºC, Humedad: {humitat}
+      %, (Temperatura de confort: {confort}ºC),{" "}
+      <span className="capitalize">{descrip}</span>
+    </Fragment>
+  );
+};
+
+export default Meteo;
+
+```
+
+##### Acudit.js (/src/Components/Acudit.js)
+
+```jsx
+import React, { Fragment, useState } from "react";
+
+import axios from "axios";
+
+import { emojify } from "react-emojione";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Card, Container, Row, Col } from "react-bootstrap";
+
+const Acudit = () => {
+  // XIST
+  const [xist, setXist] = useState("");
+
+  const xistejar = () => {
+    axios.get("https://api.chucknorris.io/jokes/random").then((res) => {
+      setXist(res.data.value);
+    });
+  };
+
+  return (
+    <Fragment>
+      <Card className="text-center shadow p-1 p-md-2 rounded">
+        <Card.Body>
+          <Card.Title>
+            <h3>El saben aquell que diu...{emojify("^__^")}</h3>
+          </Card.Title>
+          <Card.Text>{xist}</Card.Text>
+          <Button onClick={xistejar} variant="primary" className="botoncillu">
+            Següent Acudit
+          </Button>
+        </Card.Body>
+      </Card>
+    </Fragment>
+  );
+};
+
+export default Acudit;
+
+```
+
+##### style.css (/src/assets/css/style.css)
+
+```css
+body {
+  background: linear-gradient(0deg, #ffffff33, #ffffffff),
+    url("../img/man-laugh.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.fullSize {
+  min-height: 80vh;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.botoncillu {
+  background: lightseagreen !important;
+}
+
+```
+
+---
