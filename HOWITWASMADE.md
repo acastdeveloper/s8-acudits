@@ -208,15 +208,11 @@ To get a similar look and feel we are going to need:
    
    - A library with predefined styles like cards, buttons etc.
 
-
-
 ### HOW HAVE I PUT THE BACKGROUND IMAGE
 
 - I've added a a folder **assets** inside **src** with more folders inside: **css** and **img** where I've placed an stylesheet document *style.css* and a background image respectively. 
 
 - And then i import the stylesheet in the component where we are working, in that case **Main.js**. I put it after the *import React... *statement as it follows: `import "./assets/css/style.css";`
-
-
 
 ### HOW I PUT THE EMOJI
 
@@ -237,8 +233,6 @@ import { emojify } from "react-emojione";
 ```
 
 [More info](https://npmjs.com/package/react-emojione)
-
-
 
 ### HOW TO STYLIZE WITH REACT-BOOTSTRAP
 
@@ -305,12 +299,10 @@ body {
 .fullSize {
   min-height: 80vh;
 }
- 
+
 .botoncillu {
   background: lightseagreen !important;
 }
-
-
 ```
 
 And the return statement:
@@ -318,9 +310,9 @@ And the return statement:
 ```jsx
 return (
     <Container fluid>
-        <Row className="theTop p-2">
+      <Row className="theTop p-2">
             The Weather...
-        </Row>
+      </Row>
       <Row className="fullSize d-flex">
         <Col className="col-8 col-lg-6 col-xl-4 m-auto" >
           <Card className="text-center shadow p-1 p-md-2 rounded">
@@ -339,3 +331,98 @@ return (
     </Container>
   );
 ```
+
+For more info about how to install react-bootstrap and materialize-ui watch this video:
+
+[![](http://img.youtube.com/vi/OYfKGT5AfZ0/0.jpg)](http://www.youtube.com/watch?v=OYfKGT5AfZ0 "")
+
+---
+
+## EXERCICI 03
+
+The exercise statement requires that we consume a meteo APi and it must be shown when page is loaded, not by clicking in a button, that is why I use useEffect hook.
+
+Finally the code for Main.js it will be as it follows:
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
+
+import { emojify } from "react-emojione";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Card, Container, Row, Col } from "react-bootstrap";
+
+import "./assets/css/style.css";
+
+const Main = () => {
+  // METEO
+  const [temperatura, setTemperatura] = useState(0);
+  const [lloc, setLloc] = useState("L'Hospitalet");
+  const [humitat, setHumitat] = useState(0);
+  const [confort, setConfort] = useState(0);
+  const [descrip, setDescrip] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.openweathermap.org/data/2.5/weather?q=barcelona,es&lang=es&units=metric&appid=a0e6ac9e92dc18ce3cd493de048052d5"
+      )
+      .then((res) => {
+        setTemperatura(res.data.main.temp);
+        setLloc(res.data.name);
+        setHumitat(res.data.main.humidity);
+        setConfort(res.data.main.feels_like);
+        setDescrip(res.data.weather[0].description);
+      });
+  }, []);
+
+  // XIST
+  const [xist, setXist] = useState("");
+
+  const xistejar = () => {
+    axios.get("https://api.chucknorris.io/jokes/random").then((res) => {
+      setXist(res.data.value);
+    });
+  };
+
+  return (
+    <Container fluid>
+      <Row className="theTop p-2">
+        <Col>
+          <strong>{lloc}</strong>: Temperatura: {temperatura}ºC, Humedad:{" "}
+          {humitat}%, (Temperatura de confort: {confort}ºC),{" "}
+          <span className="capitalize">{descrip}</span>
+        </Col>
+      </Row>
+      <Row className="fullSize d-flex">
+        <Col className="col-8 col-lg-6 col-xl-4 m-auto">
+          <Card className="text-center shadow p-1 p-md-2 rounded">
+            <Card.Body>
+              <Card.Title>
+                <h3>El saben aquell que diu...{emojify("^__^")}</h3>
+              </Card.Title>
+              <Card.Text>{xist}</Card.Text>
+              <Button
+                onClick={xistejar}
+                variant="primary"
+                className="botoncillu"
+              >
+                Següent Acudit
+              </Button>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default Main;
+
+```
+
+As we see this is not a very clean, reusable and optimized code. It's not  taking advantage of working with components with React. Since the begginning we could have separated funcionalities in independent components. 
+
+I commit this as "***Exercici 03 - Nivell 3 - On the quirki mode of doing things***". But the next one step it will be refactorize all this code in a better mode. 
