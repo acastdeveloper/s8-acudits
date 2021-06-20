@@ -4,7 +4,7 @@
 
 ## EXERCICI01
 
-- I create react project using yarn instead of npm (beacuse npm has being full of issues). 
+- I create react project using yarn instead of npm (beacuse npm has being full of issues).
 
 `yarn create-app s8-acudits` in terminal.
 
@@ -47,7 +47,7 @@ export default Main;
       
       - It would be convenient to have used before this Hook separatedly to know how it must be used.
   
-  - In no-place it's said that a joke must be loaded initially. Actually, the before *static creation component* statement it says that first time is loaded it must not be any joke. <mark>That's why we are NOT using useEffect hook</mark>.     
+  - In no-place it's said that a joke must be loaded initially. Actually, the before *static creation component* statement it says that first time is loaded it must not be any joke. <mark>That's why we are NOT using useEffect hook</mark>. 
 
 - Now we have prepared AXIOS and useState in order to be used. By the moment code remains as it follows:
 
@@ -73,9 +73,9 @@ export default Main;
 
 - <u>DEFINING DEFAULT STATE</u> with useState, ( But also CREATING THE VARIABLE THAT IS GOING TO CHANGE). It's required that initiallty must not be any joke yet. Therefore initial state is empty.
   
-  - HOW:  `[xist, setXist] = useState("");`
+  - HOW: `[xist, setXist] = useState("");`
   
-  - WHERE: Inside the component and before the return statement. WHY INSIDE? Because it must be encapsulated in order to be reused with it's own state. WHY  BEFORE THE RETURN STATEMENT? We declare it before, and outside the return statement, In order to be used by the return statement. The code now remains as it follows (by the moment): 
+  - WHERE: Inside the component and before the return statement. WHY INSIDE? Because it must be encapsulated in order to be reused with it's own state. WHY BEFORE THE RETURN STATEMENT? We declare it before, and outside the return statement, In order to be used by the return statement. The code now remains as it follows (by the moment):
 
 ```jsx
 import React, { useState } from "react";
@@ -99,13 +99,13 @@ const Main = () => {
 export default Main;
 ```
 
-- DECLARING THE FUNCTION THAT WILL FETCH THE JOKES FROM THE API, TO BE CALLED from the button.  (I'm not going to define the inside logic of the function yet. That's just a preparation).
+- DECLARING THE FUNCTION THAT WILL FETCH THE JOKES FROM THE API, TO BE CALLED from the button. (I'm not going to define the inside logic of the function yet. That's just a preparation).
   
-  - WHERE: outside and before the return statement in order to be called by the return statement. 
+  - WHERE: outside and before the return statement in order to be called by the return statement.
   
   - HOW: As an arrow function like this: ` const xistejar = () => { };`
   
-  - HOW THE FUNCTION WILL BE CALLED :   With an event onClick inside the button tag as it follows: `<button onClick={xistejar}>Següent Acudit</button>`
+  - HOW THE FUNCTION WILL BE CALLED : With an event onClick inside the button tag as it follows: `<button onClick={xistejar}>Següent Acudit</button>`
 
 ```jsx
 import React, { useState } from "react";
@@ -131,11 +131,11 @@ const Main = () => {
 export default Main;
 ```
 
-- DEFINING THE FUNCTION'S INSIDE LOGIC.  
+- DEFINING THE FUNCTION'S INSIDE LOGIC.
   
-  - WHAT MUST DO THIS FUNCTION: The mission of this function is to update and change the joke getting another one everytime from an API. 
+  - WHAT MUST DO THIS FUNCTION: The mission of this function is to update and change the joke getting another one everytime from an API.
   
-  - HOW IT WILL GET JOKES FROM THE API: Using AXIOS as it follows: 
+  - HOW IT WILL GET JOKES FROM THE API: Using AXIOS as it follows:
 
 ```jsx
 axios.get('https://api.chucknorris.io/jokes/random').then((res) => {
@@ -152,9 +152,9 @@ Explanation of every part of this:
 
 - <mark>.then( callback)</mark>: once axios has connected to the api asyncronously do the callback function inside rounded brackets, that in this case is: .then(<mark>(res) => {setXist(res.data.value);}</mark>);
   
-  - WHAT THIS CALLBACK DOES: 
+  - WHAT THIS CALLBACK DOES:
     
-    - This callback function gets a parameter, that in this case is called <mark>res</mark> that is the object we've got from the Endpoint. 
+    - This callback function gets a parameter, that in this case is called <mark>res</mark> that is the object we've got from the Endpoint.
     
     - It goes throw the object to get the joke that is in <mark>res.data.value</mark>.
     
@@ -196,11 +196,11 @@ export default Main;
 
 We must do that before exercise looks like:
 
-![](./img/acudit-disseny.png)
+![](file://N:\ESCRIPTORI\S8-ACUDITS\s8-acudits\img\acudit-disseny.png)
 
 To get a similar look and feel we are going to need:
 
-1. A background image 
+1. A background image
 
 2. Some extra-libraries:
    
@@ -210,7 +210,7 @@ To get a similar look and feel we are going to need:
 
 ### HOW HAVE I PUT THE BACKGROUND IMAGE
 
-- I've added a a folder **assets** inside **src** with more folders inside: **css** and **img** where I've placed an stylesheet document *style.css* and a background image respectively. 
+- I've added a a folder **assets** inside **src** with more folders inside: **css** and **img** where I've placed an stylesheet document *style.css* and a background image respectively.
 
 - And then i import the stylesheet in the component where we are working, in that case **Main.js**. I put it after the *import React... *statement as it follows: `import "./assets/css/style.css";`
 
@@ -218,7 +218,7 @@ To get a similar look and feel we are going to need:
 
 We are using the library REACT-EMOJIONE following next steps:
 
-- INSTALL by doing `yarn add react-emojione` in terminal. 
+- INSTALL by doing `yarn add react-emojione` in terminal.
 
 - IMPORT library to our component:
 
@@ -226,7 +226,7 @@ We are using the library REACT-EMOJIONE following next steps:
 import { emojify } from "react-emojione";
 ```
 
-- PUT the shortcode in order to put the emoji-component at the place where must be rendered as it follows: 
+- PUT the shortcode in order to put the emoji-component at the place where must be rendered as it follows:
 
 ```jsx
 {emojify('^__^')}
@@ -236,11 +236,11 @@ import { emojify } from "react-emojione";
 
 ### HOW TO STYLIZE WITH REACT-BOOTSTRAP
 
-In order to get predefined styles like Bootstrap I will use a React library based on Bootstrap called React-Bootstrap. This library let us create components that has already Bootstrap styles assigned. To learn how to use React-Bootstrap you can go to its  [official page](https://react-bootstrap.github.io/). 
+In order to get predefined styles like Bootstrap I will use a React library based on Bootstrap called React-Bootstrap. This library let us create components that has already Bootstrap styles assigned. To learn how to use React-Bootstrap you can go to its [official page](https://react-bootstrap.github.io/).
 
 But I'll explain how to implement in our project. We must follow these steps:
 
-- INSTALL REACT-BOOTSTRAP: `yarn add react-bootstrap` in terminal. 
+- INSTALL REACT-BOOTSTRAP: `yarn add react-bootstrap` in terminal.
 
 - INSTALL BOOTSTRAP. `yarn add boostrap`in terminal.
 
@@ -267,7 +267,7 @@ return (
   );
 ```
 
-To that: 
+To that:
 
 ```jsx
 return (
@@ -334,7 +334,7 @@ return (
 
 For more info about how to install react-bootstrap and materialize-ui watch this video:
 
-[![](http://img.youtube.com/vi/OYfKGT5AfZ0/0.jpg)](http://www.youtube.com/watch?v=OYfKGT5AfZ0 "")
+[](http://www.youtube.com/watch?v=OYfKGT5AfZ0 "")
 
 ---
 
@@ -420,9 +420,156 @@ const Main = () => {
 };
 
 export default Main;
-
 ```
 
-As we see this is not a very clean, reusable and optimized code. It's not  taking advantage of working with components with React. Since the begginning we could have separated funcionalities in independent components. 
+As we see this is not a very clean, reusable and optimized code. It's not taking advantage of working with components with React. Since the begginning we could have separated funcionalities in independent components.
 
-I commit this as "***Exercici 03 - Nivell 3 - On the quirki mode of doing things***". But the next one step it will be refactorize all this code in a better mode. 
+I commit this as "***Exercici 03 - Nivell 3 - On the quirky mode of doing things***". But the next one step it will be refactorize all this code in a better mode.
+
+#### REFACTORIZATION
+
+It's much better work with separated components before all becomes very confuse as we have seen. Anyway this is how we should have done before:
+
+I create folder **Components**, on **src** folder and I create there 2 components: Acudit.js and Meteo.js.
+
+##### Main.js (/src/Main.js)
+
+```jsx
+import React from "react";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row, Col } from "react-bootstrap";
+
+import "./assets/css/style.css";
+
+import Meteo from "./Components/Meteo";
+import Acudit from "./Components/Acudit";
+
+const Main = () => {
+  return (
+    <Container fluid>
+      <Row className="theTop p-2">
+        <Col>
+          <Meteo></Meteo> {/* LOOK HERE */}
+        </Col>
+      </Row>
+      <Row className="fullSize d-flex">
+        <Col className="col-8 col-lg-6 col-xl-4 m-auto">
+          <Acudit></Acudit> {/* LOOK HERE */}
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default Main;
+```
+
+##### Meteo.js (/src/Components/Meteo.js)
+
+```jsx
+import React, { Fragment, useState, useEffect } from "react";
+
+import axios from "axios";
+
+const Meteo = () => {
+  // METEO
+  const [temperatura, setTemperatura] = useState(0);
+  const [lloc, setLloc] = useState("L'Hospitalet");
+  const [humitat, setHumitat] = useState(0);
+  const [confort, setConfort] = useState(0);
+  const [descrip, setDescrip] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.openweathermap.org/data/2.5/weather?q=barcelona,es&lang=es&units=metric&appid=a0e6ac9e92dc18ce3cd493de048052d5"
+      )
+      .then((res) => {
+        setTemperatura(res.data.main.temp);
+        setLloc(res.data.name);
+        setHumitat(res.data.main.humidity);
+        setConfort(res.data.main.feels_like);
+        setDescrip(res.data.weather[0].description);
+      });
+  }, []);
+
+  return (
+    <Fragment>
+      <strong>{lloc}</strong>: Temperatura: {temperatura}ºC, Humedad: {humitat}
+      %, (Temperatura de confort: {confort}ºC),{" "}
+      <span className="capitalize">{descrip}</span>
+    </Fragment>
+  );
+};
+
+export default Meteo;
+```
+
+##### Acudit.js (/src/Components/Acudit.js)
+
+```jsx
+import React, { Fragment, useState } from "react";
+
+import axios from "axios";
+
+import { emojify } from "react-emojione";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Card, Container, Row, Col } from "react-bootstrap";
+
+const Acudit = () => {
+  // XIST
+  const [xist, setXist] = useState("");
+
+  const xistejar = () => {
+    axios.get("https://api.chucknorris.io/jokes/random").then((res) => {
+      setXist(res.data.value);
+    });
+  };
+
+  return (
+    <Fragment>
+      <Card className="text-center shadow p-1 p-md-2 rounded">
+        <Card.Body>
+          <Card.Title>
+            <h3>El saben aquell que diu...{emojify("^__^")}</h3>
+          </Card.Title>
+          <Card.Text>{xist}</Card.Text>
+          <Button onClick={xistejar} variant="primary" className="botoncillu">
+            Següent Acudit
+          </Button>
+        </Card.Body>
+      </Card>
+    </Fragment>
+  );
+};
+
+export default Acudit;
+```
+
+##### style.css (/src/assets/css/style.css)
+
+```css
+body {
+  background: linear-gradient(0deg, #ffffff33, #ffffffff),
+    url("../img/man-laugh.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.fullSize {
+  min-height: 80vh;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.botoncillu {
+  background: lightseagreen !important;
+}
+```
+
+---
