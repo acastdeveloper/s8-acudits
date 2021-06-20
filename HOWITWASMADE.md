@@ -14,7 +14,7 @@
 
 - I add `<Main/>` after the old `<App />` and `import Main from './Main';` after the old `import App from './App';`
 
--  I edit Main to create static component with a title, without content and a button for "next joke". As it follows:
+- I edit Main to create static component with a title, without content and a button for "next joke". As it follows:
 
 ```jsx
 import React from "react";
@@ -69,7 +69,6 @@ const Main = () => {
 };
 
 export default Main;
-
 ```
 
 - <u>DEFINING DEFAULT STATE</u> with useState, ( But also CREATING THE VARIABLE THAT IS GOING TO CHANGE). It's required that initiallty must not be any joke yet. Therefore initial state is empty.
@@ -79,7 +78,6 @@ export default Main;
   - WHERE: Inside the component and before the return statement. WHY INSIDE? Because it must be encapsulated in order to be reused with it's own state. WHY  BEFORE THE RETURN STATEMENT? We declare it before, and outside the return statement, In order to be used by the return statement. The code now remains as it follows (by the moment): 
 
 ```jsx
-
 import React, { useState } from "react";
 
 import axios from "axios";
@@ -99,7 +97,6 @@ const Main = () => {
 };
 
 export default Main;
-
 ```
 
 - DECLARING THE FUNCTION THAT WILL FETCH THE JOKES FROM THE API, TO BE CALLED from the button.  (I'm not going to define the inside logic of the function yet. That's just a preparation).
@@ -132,8 +129,6 @@ const Main = () => {
 };
 
 export default Main;
-
-
 ```
 
 - DEFINING THE FUNCTION'S INSIDE LOGIC.  
@@ -193,5 +188,154 @@ const Main = () => {
 };
 
 export default Main;
+```
 
+---
+
+## EXERCICI02
+
+We must do that before exercise looks like:
+
+![](./img/acudit-disseny.png)
+
+To get a similar look and feel we are going to need:
+
+1. A background image 
+
+2. Some extra-libraries:
+   
+   - A library to put emojis.
+   
+   - A library with predefined styles like cards, buttons etc.
+
+
+
+### HOW HAVE I PUT THE BACKGROUND IMAGE
+
+- I've added a a folder **assets** inside **src** with more folders inside: **css** and **img** where I've placed an stylesheet document *style.css* and a background image respectively. 
+
+- And then i import the stylesheet in the component where we are working, in that case **Main.js**. I put it after the *import React... *statement as it follows: `import "./assets/css/style.css";`
+
+
+
+### HOW I PUT THE EMOJI
+
+We are using the library REACT-EMOJIONE following next steps:
+
+- INSTALL by doing `yarn add react-emojione` in terminal. 
+
+- IMPORT library to our component:
+
+```jsx
+import { emojify } from "react-emojione";
+```
+
+- PUT the shortcode in order to put the emoji-component at the place where must be rendered as it follows: 
+
+```jsx
+{emojify('^__^')}
+```
+
+[More info](https://npmjs.com/package/react-emojione)
+
+
+
+### HOW TO STYLIZE WITH REACT-BOOTSTRAP
+
+In order to get predefined styles like Bootstrap I will use a React library based on Bootstrap called React-Bootstrap. This library let us create components that has already Bootstrap styles assigned. To learn how to use React-Bootstrap you can go to its  [official page](https://react-bootstrap.github.io/). 
+
+But I'll explain how to implement in our project. We must follow these steps:
+
+- INSTALL REACT-BOOTSTRAP: `yarn add react-bootstrap` in terminal. 
+
+- INSTALL BOOTSTRAP. `yarn add boostrap`in terminal.
+
+- IMPORT REACT-BOOTSTRAP: We declare the import statements writing every component that we use in our component like Button, Card, Container, Col, Row, etc as it follows, for instance.
+
+```jsx
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Card } from "react-bootstrap";
+```
+
+Now we must use the components in the return statement following the examples of the [official page](https://react-bootstrap.github.io/components/alerts/).
+
+I change from that:
+
+```jsx
+return (
+    <div>
+      <header>
+        <h3>El saben aquell que diu...{emojify('^__^')}</h3>
+      </header>
+      <section>{xist}</section>
+      <button onClick={xistejar}>Següent Acudit</button>
+    </div>
+  );
+```
+
+To that: 
+
+```jsx
+return (
+    <Card>
+      <Card.Body>
+      <Card.Title>
+        <h3>El saben aquell que diu...{emojify('^__^')}</h3>
+      </Card.Title>
+      <Card.Text>{xist}</Card.Text>
+      <Button onClick={xistejar} variant="primary">Següent Acudit</Button>
+      </Card.Body>
+    </Card>
+  );
+```
+
+But we have a problem. Card is occuping the wide of the page. It doesn't look like the example we must imitate. We should ellaborate more the layout, using also the Bootstrap options **container**, **row**, **col**. Finally, after adding styles to style.css and changing this return statement code is as follows:
+
+The stylesheet **styles.css** on the **assets/css** folder:
+
+```css
+body {
+  background: linear-gradient(0deg, #ffffff33, #ffffffff),
+    url("../img/man-laugh.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.fullSize {
+  min-height: 80vh;
+}
+ 
+.botoncillu {
+  background: lightseagreen !important;
+}
+
+
+```
+
+And the return statement:
+
+```jsx
+return (
+    <Container fluid>
+        <Row className="theTop p-2">
+            The Weather...
+        </Row>
+      <Row className="fullSize d-flex">
+        <Col className="col-8 col-lg-6 col-xl-4 m-auto" >
+          <Card className="text-center shadow p-1 p-md-2 rounded">
+            <Card.Body>
+              <Card.Title>
+                <h3>El saben aquell que diu...{emojify("^__^")}</h3>
+              </Card.Title>
+              <Card.Text>{xist}</Card.Text>
+              <Button onClick={xistejar} variant="primary" className="botoncillu">
+                Següent Acudit
+              </Button>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+  );
 ```

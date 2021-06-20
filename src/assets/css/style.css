@@ -1,0 +1,19 @@
+body {
+  background: linear-gradient(0deg, #ffffff33, #ffffffff),
+    url("../img/man-laugh.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.fullSize {
+  min-height: 80vh;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.botoncillu {
+  background: lightseagreen !important;
+}
