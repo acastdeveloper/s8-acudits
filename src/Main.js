@@ -6,9 +6,9 @@ const Main = () => {
   const [xist, setXist] = useState("");
 
   const xistejar = () => {
-    axios.get('https://api.chucknorris.io/jokes/random').then((res) => {
-        setXist(res.data.value);
-      });
+    axios.get("https://api.chucknorris.io/jokes/random").then((res) => {
+      setXist(res.data.value);
+    });
   };
 
   return (
