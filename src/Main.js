@@ -5,8 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import "./assets/css/style.css";
 
-import Meteo from "./Components/Meteo";
-import Acudit from "./Components/Acudit";
+import Meteo from "./components/Meteo";
+import Acudit from "./components/Acudit";
 
 const Main = () => {
   return (

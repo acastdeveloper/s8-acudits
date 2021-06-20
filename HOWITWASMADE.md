@@ -573,3 +573,129 @@ body {
 ```
 
 ---
+
+## Exercici 04
+
+Exercise statement says we must do some modifications: 
+
+- Show a welcome screen by using a new component Welcome.js <u>when page is loaded</u>. 
+
+- This component must have a button that let us enter to the Jokes screen. 
+
+- The Welcome screen and the Main screen must be shown by using conditional rendering. 
+
+#### STEPS I'VE DONE
+
+A) I have rescued the default App.js again by reactiving it on index.js
+
+##### index.js (/src/index.js)
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App'; /* LOOK HERE */
+
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App/> {/* LOOK HERE */}
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+reportWebVitals();
+
+
+```
+
+
+
+B) I've created Welcome.js component.
+
+##### Welcome.js (/src/Welcome.js)
+
+```jsx
+import React, { Fragment } from "react";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
+
+import "./assets/css/style.css";
+
+const Welcome = (props) => { /* LOOK HERE */
+  return (
+    <Fragment>
+      <Container fluid className="p-5">
+        <Row>
+          <Col>
+            <Jumbotron>
+              <h1>Benvingut/da/do Xiquet/a/o!</h1>
+              <p>Estàs a punt d'entrar a un lloc si vols.</p>
+              <p>
+                <Button
+                  variant="primary"
+                  className="botoncillu"
+                  onClick={()=>{props.isPushed(1)}}
+                > 
+                    {/* LOOK HERE */}
+                    
+                  Entrar
+                </Button>
+              </p>
+            </Jumbotron>
+          </Col>
+        </Row>
+      </Container>
+    </Fragment>
+  );
+};
+
+export default Welcome;
+
+
+```
+
+Look where is written `/* LOOK HERE */` . On this compoment I've added **props** options to send a prop from the child to the parent in order that parent knows if button is pushed or not.
+
+B) I've redefined App.js as it follows:
+
+##### App.js (/src/App.js)
+
+```jsx
+import React, { Fragment, useState } from "react";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
+
+import Welcome from "./Welcome";
+import Main from "./Main";
+
+const App = () => {
+  const [onOf, setOnOf] = useState(0); /* LOOK HERE */
+
+  return (
+    <Fragment>
+      {onOf===0?(<Welcome isPushed={(n) => setOnOf(n)} />):(
+        <Main/>
+      )} {/* LOOK HERE, THIS IS THE CONDITION */} 
+        
+    </Fragment>
+  );
+};
+
+export default App;
+
+
+```
+
+- I've imported useState hook in order to capture state's changes when user clicks on the button of the Welcome component. And of course I've declared this state statement as `const [onOf, setOnOf] = useState(0);`
+
+- Look at the Component Welcome inside the return statement. `<Welcome isPushed={(n) => setOnOf(n)} />`
+  
+  - It has the attribute isPushed that is the prop defined on Welcome component when user clicks on its button. When this occurs it executes the inside callback function that receives a parameter n and is asigned to the state statement setOnOf(n).
+
+- The condition is made whith a ternary operator. If variable onOf ===0 will render component <Welcome/> But if it's not 0 will render compoment <Main/>
+  
+  

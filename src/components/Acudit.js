@@ -5,7 +5,7 @@ import axios from "axios";
 import { emojify } from "react-emojione";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Card, Container, Row, Col } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 const Acudit = () => {
   // XIST
