@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useState } from "react";
 
-function App() {
+import "bootstrap/dist/css/bootstrap.min.css";
+
+
+import Welcome from "./Welcome";
+import Main from "./Main";
+
+const App = () => {
+  const [onOf, setOnOf] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      {onOf===0?(<Welcome isPushed={(n) => setOnOf(n)} />):(
+        <Main/>
+      )}
+    </Fragment>
   );
-}
+};
 
 export default App;
