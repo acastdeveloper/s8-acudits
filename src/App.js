@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
+
 
 import Welcome from "./Welcome";
 import Main from "./Main";

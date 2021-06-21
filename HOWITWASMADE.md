@@ -606,11 +606,7 @@ ReactDOM.render(
 );
 
 reportWebVitals();
-
-
 ```
-
-
 
 B) I've created Welcome.js component.
 
@@ -640,7 +636,7 @@ const Welcome = (props) => { /* LOOK HERE */
                   onClick={()=>{props.isPushed(1)}}
                 > 
                     {/* LOOK HERE */}
-                    
+
                   Entrar
                 </Button>
               </p>
@@ -653,8 +649,6 @@ const Welcome = (props) => { /* LOOK HERE */
 };
 
 export default Welcome;
-
-
 ```
 
 Look where is written `/* LOOK HERE */` . On this compoment I've added **props** options to send a prop from the child to the parent in order that parent knows if button is pushed or not.
@@ -680,14 +674,12 @@ const App = () => {
       {onOf===0?(<Welcome isPushed={(n) => setOnOf(n)} />):(
         <Main/>
       )} {/* LOOK HERE, THIS IS THE CONDITION */} 
-        
+
     </Fragment>
   );
 };
 
 export default App;
-
-
 ```
 
 - I've imported useState hook in order to capture state's changes when user clicks on the button of the Welcome component. And of course I've declared this state statement as `const [onOf, setOnOf] = useState(0);`
@@ -697,5 +689,119 @@ export default App;
   - It has the attribute isPushed that is the prop defined on Welcome component when user clicks on its button. When this occurs it executes the inside callback function that receives a parameter n and is asigned to the state statement setOnOf(n).
 
 - The condition is made whith a ternary operator. If variable onOf ===0 will render component <Welcome/> But if it's not 0 will render compoment <Main/>
-  
-  
+
+---
+
+## Exercici 05
+
+Instead of using condition rendering now we must use **Routes**.
+
+In order to acomplish the exercise statement we previously need to be able to react to use react-router-dom that is a 3rd part library. We follow these steps:
+
+- INSTALL
+  `yarn add react-router-dom` in the terminal
+
+- IMPORT
+  `import { BrowserRouter, Route, Switch } from "react-router-dom";` in the index.js
+
+In order to compare the solution with the previous one I create App5.js and Welcome5.js and I do these changes.
+
+##### index.js (/src/index.js)
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "./index.css";
+import App5 from "./App5";
+import Main from "./Main";
+
+import reportWebVitals from "./reportWebVitals";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Switch>
+        <Route component={Main} path="/acudits"></Route>
+        <Route component={App5} exact path="/"></Route>
+      </Switch>
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
+reportWebVitals();
+
+```
+
+##### App5.js
+
+```jsx
+import React, { Fragment } from "react";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import Welcome5 from "./Welcome5";
+
+const App5 = () => {
+  return (
+    <Fragment>
+      <Welcome5 />
+    </Fragment>
+  );
+};
+
+export default App5;
+
+```
+
+##### Welcome5.js
+
+```jsx
+
+import React, { Fragment } from "react";
+import { useHistory } from "react-router-dom"; /* LOOK HERE */
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
+
+import "./assets/css/style.css";
+
+const Welcome = () => {
+  const history = useHistory(); /* LOOK HERE */
+
+  const canviar = () => { /* LOOK HERE */
+    history.replace("/acudits");  /* LOOK HERE */
+  };
+
+  return (
+    <Fragment>
+      <Container fluid className="p-5">
+        <Row>
+          <Col>
+            <Jumbotron>
+              <h1>Benvingut/da/do Xiquet/a/o!</h1>
+              <p>Estàs a punt d'entrar a un lloc si vols.</p>
+              <p>
+                <Button
+                  variant="primary"
+                  className="botoncillu"
+                  onClick={canviar} 
+                >  
+                  Entrar
+                </Button>
+              </p>
+            </Jumbotron>
+          </Col>
+        </Row>
+      </Container>
+    </Fragment>
+  );
+};
+
+export default Welcome;
+
+
+```
+
+ 
